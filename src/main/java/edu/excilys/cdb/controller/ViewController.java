@@ -1,17 +1,14 @@
-package edu.excilys.cdb.controller;
+package main.java.edu.excilys.cdb.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
-import edu.excilys.cdb.dao.CompanyDAO;
-import edu.excilys.cdb.dao.ComputerDAO;
-import edu.excilys.cdb.model.Company;
-import edu.excilys.cdb.model.Computer;
-import edu.excilys.cdb.ui.ConsoleView;
-import edu.excilys.cdb.ui.UImessage;
+import main.java.edu.excilys.cdb.dao.CompanyDAO;
+import main.java.edu.excilys.cdb.dao.ComputerDAO;
+import main.java.edu.excilys.cdb.model.*;
+import main.java.edu.excilys.cdb.ui.ConsoleView;
+import main.java.edu.excilys.cdb.ui.UImessage;
 
 
 /**

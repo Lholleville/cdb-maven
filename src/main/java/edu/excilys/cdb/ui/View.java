@@ -1,6 +1,6 @@
-package edu.excilys.cdb.ui;
+package main.java.edu.excilys.cdb.ui;
 
-import edu.excilys.cdb.controller.Controller;
+import main.java.edu.excilys.cdb.controller.Controller;
 /**
  * Mother class of all application's View
  * @author holle

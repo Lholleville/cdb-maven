@@ -1,4 +1,4 @@
-package edu.excilys.cdb.ui;
+package main.java.edu.excilys.cdb.ui;
 
 public enum UImessage {
 	

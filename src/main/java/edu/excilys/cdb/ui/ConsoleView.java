@@ -1,8 +1,8 @@
-package edu.excilys.cdb.ui;
+package main.java.edu.excilys.cdb.ui;
 
 import java.util.Scanner;
 
-import edu.excilys.cdb.controller.ViewController;
+import main.java.edu.excilys.cdb.controller.ViewController;
 /**
  * 
  * @author holle

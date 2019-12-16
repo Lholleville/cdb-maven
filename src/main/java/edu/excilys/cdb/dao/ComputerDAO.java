@@ -1,4 +1,4 @@
-package edu.excilys.cdb.dao;
+package main.java.edu.excilys.cdb.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import edu.excilys.cdb.model.Company;
-import edu.excilys.cdb.model.Computer;
+import main.java.edu.excilys.cdb.model.Company;
+import main.java.edu.excilys.cdb.model.Computer;
 
 /**
  * @author holle

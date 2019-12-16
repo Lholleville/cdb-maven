@@ -1,4 +1,4 @@
-package edu.excilys.cdb.dao;
+package main.java.edu.excilys.cdb.dao;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
