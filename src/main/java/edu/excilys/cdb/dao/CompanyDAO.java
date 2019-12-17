@@ -11,21 +11,29 @@ import main.java.edu.excilys.cdb.model.Company;
 
 public class CompanyDAO{
 
-	private Connection connect = ConnectionMYSQL.getInstance();
-	
 	private final String SQL_FIND_ALL_COMPANIES = "SELECT id, name FROM company";
 	private final String SQL_FIND_COMPANY = "SELECT id, name FROM company WHERE id = ?";
+	
+	private static CompanyDAO companyDAO = null;
+	
+	private CompanyDAO() {}
+	
+	public static CompanyDAO getInstance() {
+		if(companyDAO == null) {
+			companyDAO = new CompanyDAO();
+		}
+		return companyDAO;
+	}
 	
 	public ArrayList<Company> list(){
 		ArrayList<Company> list = new ArrayList<Company>();
 		
 		try {
-			PreparedStatement stmt = this.connect.prepareStatement(SQL_FIND_ALL_COMPANIES);
+			Connection connect = ConnectionMYSQL.getInstance(); PreparedStatement stmt = connect.prepareStatement(SQL_FIND_ALL_COMPANIES);
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
 				list.add(this.map(result));
 			}
-			//ConnectionMYSQL.close(result, stmt, this.connect);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}		
@@ -35,7 +43,7 @@ public class CompanyDAO{
 	public Optional<Company> find(long id) {
 		Company company = new Company();
 		try {
-			PreparedStatement stmt = this.connect.prepareStatement(SQL_FIND_COMPANY);
+			Connection connect = ConnectionMYSQL.getInstance(); PreparedStatement stmt = connect.prepareStatement(SQL_FIND_COMPANY);
 			stmt.setLong(1, id);
 			ResultSet result = stmt.executeQuery();
 			if(result.first()) {
@@ -56,5 +64,4 @@ public class CompanyDAO{
 		}
 		return company;
 	}
-	
 }

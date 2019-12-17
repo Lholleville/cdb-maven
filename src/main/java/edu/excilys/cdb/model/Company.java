@@ -49,6 +49,7 @@ public class Company {
 		return this.listComputer.get(i);
 	}
 	
+	@Override
 	public String toString() {
 		return this.getId() + " " + this.getName(); 
 	}

@@ -43,10 +43,12 @@ public class ConnectionMYSQL {
 		return connect;
 	}
 	
-	public static void close(ResultSet rs, PreparedStatement ps, Connection conn) {
+	/*public static void close(ResultSet rs, PreparedStatement ps, Connection conn) {
+
 		if(rs != null) {
 			try {
 				rs.close();
+				
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}
@@ -65,7 +67,8 @@ public class ConnectionMYSQL {
 				e.printStackTrace();
 			}
 		}
-	}
+		connect = null;
+	}*/
 	
 	private Properties readPropertiesFile(String fileName) throws IOException {
 	      FileInputStream fis = null;
