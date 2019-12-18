@@ -31,6 +31,8 @@ public class ComputerDAOTest extends TestCase{
 		assertTrue(computerOptional.isPresent());
 		Computer computer = computerOptional.get();
 		assertTrue(computer instanceof Computer);
+		System.out.println(VALID_COMPUTER.toString());
+		System.out.println(computer.toString());
 		assertEquals(VALID_COMPUTER.toString(), computer.toString());
 	}
 	
@@ -46,19 +48,23 @@ public class ComputerDAOTest extends TestCase{
 		assertTrue(list.size() >= 300);
 	}
 	
-	@Test
-	public void testCreateComputer() throws Exception{
-		
-	}
+//	@Test
+//	public void testCreateComputer() throws Exception{
+//		
+//	}
+//	
+//	@Test
+//	public void testUpdateComputer() throws Exception{
+//		
+//	}
+//	
+//	
+//	public void testDeleteComputer() throws Exception{
+//		
+//	}
 	
-	@Test
-	public void testUpdateComputer() throws Exception{
-		
-	}
-	
-	
-	public void testDeleteComputer() throws Exception{
-		
+	public void testgetComputerNumber() throws Exception{
+		assertTrue(ComputerDAO.getInstance().getComputerNumber() >= 0);
 	}
 	
 }

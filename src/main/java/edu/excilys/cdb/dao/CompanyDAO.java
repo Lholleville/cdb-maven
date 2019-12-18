@@ -15,7 +15,6 @@ public class CompanyDAO{
 	private final String SQL_FIND_COMPANY = "SELECT id, name FROM company WHERE id = ?";
 	
 	private static CompanyDAO companyDAO = null;
-	
 	private CompanyDAO() {}
 	
 	public static CompanyDAO getInstance() {
@@ -29,13 +28,17 @@ public class CompanyDAO{
 		ArrayList<Company> list = new ArrayList<Company>();
 		
 		try {
-			Connection connect = ConnectionMYSQL.getInstance(); PreparedStatement stmt = connect.prepareStatement(SQL_FIND_ALL_COMPANIES);
+			Connection connect = ConnectionMYSQL.getInstance().connect(); 
+			PreparedStatement stmt = connect.prepareStatement(SQL_FIND_ALL_COMPANIES);
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				list.add(this.map(result));
+				list.add(this.map(result.getLong("id"), result.getString("name")));
 			}
+			result.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionMYSQL.getInstance().disconnect();
 		}		
 		return list;
 	}
@@ -43,25 +46,26 @@ public class CompanyDAO{
 	public Optional<Company> find(long id) {
 		Company company = new Company();
 		try {
-			Connection connect = ConnectionMYSQL.getInstance(); PreparedStatement stmt = connect.prepareStatement(SQL_FIND_COMPANY);
+			Connection connect = ConnectionMYSQL.getInstance().connect(); 
+			PreparedStatement stmt = connect.prepareStatement(SQL_FIND_COMPANY);
 			stmt.setLong(1, id);
 			ResultSet result = stmt.executeQuery();
 			if(result.first()) {
-				company = this.map(result);
+				company = this.map(result.getLong("id"), result.getString("name"));
 			}
+			result.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}finally {
+			ConnectionMYSQL.getInstance().disconnect();
 		}
 		return Optional.ofNullable(company);
 	}
 	
-	private Company map(ResultSet r) {
+	private Company map(long id, String name) {
 		Company company = new Company();
-		try {
-			company = new Company(r.getLong("id"), r.getString("name"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		company = new Company(id,name);
+		
 		return company;
 	}
 }

@@ -51,5 +51,9 @@ public class ComputerService {
 		computerDAO.delete(id);
 	}
 	
+	public long getNbComputers() {
+		return computerDAO.getComputerNumber();
+	}
+	
 	
 }

@@ -1,74 +1,64 @@
 package main.java.edu.excilys.cdb.dao;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.sql.PreparedStatement;
 
 public class ConnectionMYSQL {
 	
-	private String URL;
+	private String url;
 	private String user;
 	private String password;
 	
+	private static ConnectionMYSQL INSTANCE;
+	
 	private static Connection connect;
 	
-	private ConnectionMYSQL() throws IOException{
-
-		Properties prop = readPropertiesFile("project.properties");
-		this.URL = prop.getProperty("server");
-		this.user = prop.getProperty("username");
-		this.password = prop.getProperty("password");
-
-		try {
-			connect = DriverManager.getConnection(this.URL, this.user, this.password);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}	
+	private ConnectionMYSQL(){
+		Properties prop;
+		//try {
+			//prop = readPropertiesFile("project.properties");
+			this.url = /*prop.getProperty("server")*/"jdbc:mysql://localhost:3306/computer-database-db?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC&useSSL=false";
+			this.user = /*prop.getProperty("username")*/ "admincdb";
+			this.password = /*prop.getProperty("password")*/ "qwerty1234";
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
-	public static Connection getInstance() {
-		if(connect == null) {
-			try {
-				new ConnectionMYSQL();
-			} catch (IOException e) {
-				e.printStackTrace();
+	public static ConnectionMYSQL getInstance() {
+		if(INSTANCE == null) 
+			INSTANCE = new ConnectionMYSQL();
+		return INSTANCE;
+	}
+	
+	public Connection connect() {
+		try {
+			if(connect == null || connect.isClosed()) {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				connect = DriverManager.getConnection(url, user, password);
 			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return connect;
 	}
 	
-	/*public static void close(ResultSet rs, PreparedStatement ps, Connection conn) {
-
-		if(rs != null) {
-			try {
-				rs.close();
-				
-			}catch(SQLException e) {
-				e.printStackTrace();
+	public void disconnect() {
+		try {
+			if(connect != null) {					
+				connect.close();
+				connect = null;
 			}
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
-		if(ps != null) {
-			try {
-				ps.close();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		if(conn != null) {
-			try {
-				conn.close();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		connect = null;
-	}*/
+	}
 	
 	private Properties readPropertiesFile(String fileName) throws IOException {
 	      FileInputStream fis = null;
