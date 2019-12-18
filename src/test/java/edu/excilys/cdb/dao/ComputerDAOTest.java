@@ -27,7 +27,7 @@ public class ComputerDAOTest extends TestCase{
 	
 	@Test
 	public void testFindComputer() throws Exception{
-		Optional<Computer> computerOptional = new ComputerDAO().find(1);
+		Optional<Computer> computerOptional = ComputerDAO.getInstance().find(1);
 		assertTrue(computerOptional.isPresent());
 		Computer computer = computerOptional.get();
 		assertTrue(computer instanceof Computer);
@@ -36,13 +36,29 @@ public class ComputerDAOTest extends TestCase{
 	
 	@Test
 	public void testFindNullComputer() throws Exception{
-		Optional<Computer> computerOptional = new ComputerDAO().find(10000);
+		Optional<Computer> computerOptional = ComputerDAO.getInstance().find(10000);
 		assertFalse(computerOptional.isPresent());
 	}
 	
 	@Test
 	public void testListComputer() throws Exception{
-		ArrayList<Computer> list = new ComputerDAO().list();
+		ArrayList<Computer> list = ComputerDAO.getInstance().list();
 		assertTrue(list.size() >= 300);
 	}
+	
+	@Test
+	public void testCreateComputer() throws Exception{
+		
+	}
+	
+	@Test
+	public void testUpdateComputer() throws Exception{
+		
+	}
+	
+	
+	public void testDeleteComputer() throws Exception{
+		
+	}
+	
 }

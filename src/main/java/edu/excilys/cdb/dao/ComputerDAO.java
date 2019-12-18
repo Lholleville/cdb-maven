@@ -8,7 +8,8 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import main.java.edu.excilys.cdb.model.Company;
 import main.java.edu.excilys.cdb.model.Computer;
 
@@ -18,6 +19,7 @@ import main.java.edu.excilys.cdb.model.Computer;
 public class ComputerDAO {
 
 	private static ComputerDAO computerDAO = null;
+	private static final Logger LOGGER = LoggerFactory.getLogger(ComputerDAO.class); 
 	
 	/*SQL QUERIES*/
 	private final String SQL_FIND_COMPUTER = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?";
@@ -47,6 +49,7 @@ public class ComputerDAO {
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
+			LOGGER.error("error");
 		}
 		return Optional.ofNullable(computer);
 	}

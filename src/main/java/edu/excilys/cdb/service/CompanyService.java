@@ -4,6 +4,7 @@ import main.java.edu.excilys.cdb.dao.CompanyDAO;
 import main.java.edu.excilys.cdb.model.Company;
 
 public class CompanyService {
+	
 	private static CompanyDAO companyDAO = CompanyDAO.getInstance();
 	
 	private CompanyService() {};
